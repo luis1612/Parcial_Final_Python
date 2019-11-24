@@ -60,9 +60,9 @@ SECRET_KEY = 'toy^p**jvg*wlh_wc*inq46!*&@x%*dwbuq-r$x&2!+eq^(-g@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
 
-DATABASES = {
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'd8e7afs0jnfli7',
@@ -72,6 +72,10 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+]
+
+
 
 
 # Application definition
@@ -180,17 +184,11 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = os.path.join(BASE_DIR, "static_cdn"),
+STATICFILES_DIRS = os.path.join(BASE_DIR, "static_cdn",'whitenoise.storage.CompressedManifestStaticFilesStorage'),
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_cdn')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 TEMP = os.path.join(BASE_DIR, 'temp')
 
-
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # configuring the location for media
 MEDIA_URL = '/media/'
