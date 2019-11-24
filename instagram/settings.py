@@ -62,16 +62,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd8e7afs0jnfli7',
-        'USER': 'ynfluwzvxbegqn',
-        'PASSWORD': 'b6b22f4d5ccbe4f5c5395b75adc15e7400d716bdc81cf6ca0c9246f315761384',
-        'HOST': 'ec2-107-22-163-220.compute-1.amazonaws.com',
-        'PORT': '5432',
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'd8e7afs0jnfli7',
+            'USER': 'ynfluwzvxbegqn',
+            'PASSWORD': 'b6b22f4d5ccbe4f5c5395b75adc15e7400d716bdc81cf6ca0c9246f315761384',
+            'HOST': 'ec2-107-22-163-220.compute-1.amazonaws.com',
+            'PORT': '5432',
+        }
     }
-}
+
 
 ]
 
