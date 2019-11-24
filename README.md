@@ -54,7 +54,6 @@ git clone https://github.com/luis1612/Parcial_Final_Python.git
 - Mostrar imagen detallada
 - Mostrar seguidor / siguiente
 - Iniciar sesión Registrarse
-- Facebook Login
 
 ```
 git clone https://github.com/luis1612/Parcial_Final_Python.git
