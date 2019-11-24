@@ -1,0 +1,70 @@
+<style type="text/css">
+	.card{
+		max-width: 700px;
+		width: 100%;
+	}
+	.card-body{
+		padding: 20px;
+
+	}
+	.card {
+	  /*box-shadow: 3px 5px 8px 0 rgba(0, 0, 0, 0.2), 3px 18px 20px 0 rgba(0, 0, 0, 0.19);*/
+	  box-shadow: 0 0 13px rgba(0, 0, 0, 0.4);
+	  /*0 0 10px rgba(0, 0, 0, 0.2);*/
+	}
+	/*.card-img-top{
+		width: 80%;
+		height: 80%;
+	}*/
+
+</style>
+
+
+{% if post %}
+<div class="container">
+	<div class="row mb-4">
+
+		<!-- Blog Post -->
+		<div class="card m-auto">
+			<a href="{% url 'post:detail_post' post.slug %}">
+				<img class="card-img-top" src="{{post.image.url}}">
+			</a>
+			
+			<div class="card-body mt-2 mb-2">
+
+				
+				<p class="card-caption" id="caption">
+					<a class="text-dark" href="{% url 'account_detail' user.slug %}"><b>{{post.author}}</b></a> {{post.caption|safe|truncatechars:100}}</p>
+				
+				<p class="card-text">
+					<!--Don't use 'Safe' in production it allows users to write script into your web-->
+				{{post.body|safe|truncatechars:250}}</p>
+				{% if post.author == request.user %}
+					<a href="{% url 'post:edit_post' post.slug %}" class="btn btn-primary">Actualizar</a>
+				{% endif %}
+			</div>
+			<div class="card-footer text-muted">
+			  Actualizado el {{post.date_updated}} por {{post.author}}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% else %}
+
+<div class="container">
+	<div class="row">
+		<div class="card m-auto">
+			<div class="card-body mt-2 mb-2">
+				<h2 class="card-title">
+					Sin título
+				</h2>
+				<p class="card-text"> No hubo resultados que coincidan con su búsqueda: "{{query}}".</p>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+{% endif %}

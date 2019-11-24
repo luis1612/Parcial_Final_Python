@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<style type="text/css">
+	
+	.card{
+		box-shadow: 0 0 13px rgba(0, 0, 0, 0.4);
+		border: 1px solid black;
+	}
+	.container{
+		padding-top: 50px;
+
+
+	}
+	.delete-btn{
+		float: right;
+	}
+	/*.card-title{
+		background-color: #f2f2f2;
+		padding: 20px;
+	}*/
+
+
+</style>
+
+
+<div class="container">
+	<div class="row">
+		<!-- Blog Post-->
+		<div class="card">
+			<div class="row no-gutters">
+				<div class="col-md-5">
+
+					<img class="card-img-top" style="" src="{{current_post.image.url}}">
+				</div>
+				<div class="col-md-6 ">
+					<div class="card-body my-2">
+
+						<!--No use safe cuando obtenga el texto del usuario. Les permite agregar html css y js en los sitios web-->
+						<p class="card-text">{{current_post.caption|safe}}</p>
+						<p>
+							{% if current_post.author == request.user %}
+								<a href="{% url 'post:edit_post' current_post.slug %}" class="btn btn-primary">Actualizar</a>
+
+								<a href="{% url 'post:delete_post' current_post.slug %}" class="btn btn-danger delete-btn">Borrar</a>
+								
+							{% endif %}
+
+
+						</p>
+						{% if liked %}
+							<a class="btn btn-light" href="{% url 'post:unlike_post' current_post.slug %}">Dislike</a>
+						{% else %}
+							<a id="likebutton" href="{% url 'post:like_post' current_post.slug %}" class="btn btn-light">Like</a>
+						{% endif %}
+
+						<h5 style="font-size: 18px" class="my-2"><a class="text-dark" href="{% url 'post:likes' current_post.slug %}">{{like_count}} likes</a></h5>
+
+						{% if comments.count > 2 %}
+							<a id="view_comment" onclick="showcomments()" style="color: #9e9e9e; font-size: 14px"><b>Ver {{comments.count}} Comentarios</b></a>
+							<div id="all_comments" style="display: none">
+								{% for comment in comments %}
+									<p style="font-size: 13px"><b>{{comment.commenter}}</b> {{comment.comment}}</p>
+								{% endfor %}
+							</div>
+						{% else %}
+							{% for comment in comments %}
+								<p style="font-size: 14px"><b>{{comment.commenter}}</b> {{comment.comment}}</p>
+							{% endfor %}
+						{% endif %}
+						
+					</div>
+					<form class="create-form" id="myForm" method="post" enctype="multiparts/form-data">{% csrf_token %}
+						<div class="card-footer text-muted">
+							<div class="form-group" id="form_id">
+									<input class="form-control" type="text" name="comment" id="commentInput" placeholder="Añadir un comentario...">
+									<button class="submit-button btn-block" type="submit">Publicar</button>
+								</div>
+							</div>
+							
+						</div>
+					</form>	
+				</div>
+			</div>
+
+		</div>
+
+		<!-- End Blog Post-->
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+	if(performance.navigation.type == 2){
+		location.reload(true);
+	}
+
+</script>
+
+<script type="text/javascript">
+	function showcomments() {
+		document.getElementById("view_comment").style.display = 'none';
+		document.getElementById("all_comments").style.display = 'block';
+	}
+</script>
+
+{% endblock content %}

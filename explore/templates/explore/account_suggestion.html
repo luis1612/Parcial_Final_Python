@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load explore_extras %}
+
+{% block content %}
+
+
+<style type="text/css">
+	
+	.profile_picture{
+		border-radius: 50%;
+		margin-bottom: 10px;
+		align-self: center;
+		width: 55px;
+		height: 55px;
+	}
+	.btn{
+		width: 64px;
+		height: 30px;
+		font-size: 12px;
+		background-color: #1f8eed;
+		color: white;
+		align-self: center;
+		font-weight: 750;
+
+	}
+	.btn:hover{
+		color: white; 
+	}
+	.title{
+		color: #a3a3a3;
+		font-size: 14px;
+		font-weight: bold;
+	}
+	.suggestion_text{
+		color: #a3a3a3;
+		font-size: 12px;
+		align-self: center;
+	}
+
+</style>
+
+
+<div class="container">
+	<p class="mt-5 title">Descubre personas</p>
+	<div class="d-flex flex-row row-md-4">
+	
+	{% for account in accounts %}
+		
+		{% with check_if_following=connections|following_check:forloop.counter %}
+		{% if account != request.user %}
+
+		<div class="row mx-4">
+			<div class="card py-3" style="width: 175px; height: 190px" >
+				<img class= "profile_picture"  src="{{account.profile_picture.url}}">
+
+				<!-- {% if account in connection.followers %} -->
+					
+				<!-- {% endif %} -->
+				<a style="text-decoration: none; font-size: 13px; text-align: center;" class="text-dark align-text-bottom my-1" href="{% url 'account_detail' account.slug %}"><b>{{account}}</b></a>
+				<!-- <p>{{check_if_following.following}} {{account}}</p> -->
+				{% if check_if_following.following == account %}
+					<p class="suggestion_text">Te sigue</p>
+
+				{% else %}
+					<p class="suggestion_text">Sugerido para usted</p>
+				{% endif %}
+
+				<a class="btn mb-2"href="{% url 'follow' account.slug %}">Seguir</a>
+			</div>
+		</div>
+		{% endif %}
+		{% endwith %}
+		
+	{% endfor %}
+
+
+	</div>
+	
+
+
+</div>
+
+
+{% endblock %}

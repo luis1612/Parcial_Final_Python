@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<style type="text/css">
+	.user_image {
+  		border-radius: 50%;
+  	}
+  	p {
+  		color: 	#ababab;
+  		font-size: 13px;
+	}
+	.main-content{
+		 box-shadow: 0 0 13px rgba(0, 0, 0, 0.4);
+	}
+</style>
+
+
+<div class="container">
+
+
+	<div class="col-sm-8 offset-sm-2 main-content" style="background-color: white; border-radius: 20px;">
+		<div class="row justify-content-center">
+			<h4 class="mt-3 mb-0" style="font-size: 17px">Bandeja de entrada</h4>
+		</div>
+		<hr class="mt-2">
+		{% for chat in chats %}
+			{% if chat.user01 == request.user and chat.deletefor != 1 %}
+				<div class="row">
+					{% if chat.get_last_message != '' %}
+					<a style="text-decoration: none; font-size: 13px;" class="text-dark" href="{%url 'chat:message' chat.user02.slug %}">
+						<img class="user_image mx-2 mb-3" width= 40px height= 40px src="{{chat.user02.profile_picture.url}}">
+					</a>
+					<div class="col">
+						
+						{% if chat.get_last_message.message_sender == request.user %}
+							<a style="text-decoration: none; font-size: 13px;" class="text-dark align-text-bottom" href="{%url 'chat:message' chat.user02.slug %}">{{chat.user02.username}}</a>
+							<p class="align-text-top">You:{{chat.get_last_message|truncatechars:100}}</p>
+						{% else %}
+							{% if chat.get_last_message.status == 1 %}
+								<a style="text-decoration: none; font-size: 13px;" class="text-dark align-text-bottom" href="{%url 'chat:message' chat.user02.slug %}"><b>{{chat.user02.username}}</b></a>
+								<p class="align-text-top" style="color: #525252"><b>{{chat.get_last_message|truncatechars:30}}</b></p>
+							{% else %}
+								<a style="text-decoration: none; font-size: 13px;" class="text-dark align-text-bottom" href="{%url 'chat:message' chat.user02.slug %}">{{chat.user02.username}}</a>
+								<p class="align-text-top">{{chat.get_last_message|truncatechars:30}}</p>
+							{% endif %}
+						{% endif %}
+						<div id="message_extras">
+						<a href="{%url 'chat:delete_chat' id=chat.id %}">Eliminar</a>
+					</div>
+						
+
+
+						<!-- <p>{{chat.get_last_message_timestamp}}</p> -->
+
+					</div>
+					{% endif %}
+				</div>
+
+
+			{% elif chat.user02 == request.user and chat.deletefor != 2 %}
+				<div class="row">
+					{% if chat.get_last_message != '' %}
+					<a style="text-decoration: none; font-size: 13px;" class="text-dark" href="{%url 'chat:message' chat.user01.slug %}">
+						<img class="user_image mx-2 mb-3" width= 40px height= 40px src="{{chat.user01.profile_picture.url}}">
+					</a>
+					<div class="col">
+						{% if chat.get_last_message.message_sender == request.user%}
+							<a style="text-decoration: none; font-size: 13px;" class="text-dark align-text-bottom" href="{%url 'chat:message' chat.user01.slug %}">{{chat.user01.username}}</a>
+							<p class="align-text-top" style="color: #525252">You:{{chat.get_last_message}}</p>
+						{% else %}
+							{% if chat.get_last_message.status == 1 %}
+								<a style="text-decoration: none; font-size: 13px;" class="text-dark align-text-bottom" href="{%url 'chat:message' chat.user01.slug %}"><b>{{chat.user01.username}}</b></a>
+								<p class="align-text-top" style="color: #525252"><b>{{chat.get_last_message}}</b></p>
+							{% else %}
+								<a style="text-decoration: none; font-size: 13px;" class="text-dark align-text-bottom" href="{%url 'chat:message' chat.user01.slug %}">{{chat.user01.username}}</a>
+								<p class="align-text-top" >{{chat.get_last_message}}</p>
+							{% endif %}
+
+						{% endif %}
+						<div id="message_extras">
+							<a href="{%url 'chat:delete_chat' id=chat.id %}">Eliminar</a>
+
+					</div>
+					</div>
+					{% endif %}
+					
+				</div>
+
+			{% endif %}
+
+	{% endfor %} 
+	</div>
+
+</div>
+
+
+{% endblock %}
