@@ -1,0 +1,4 @@
+# Ignore the default SQLite database.
+venv/
+_pycache__/
+*.sqlite3
