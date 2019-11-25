@@ -13,9 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import django_heroku
 import dj_database_url
-from decouple import config
-
-
+from decouple import config,Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,7 +32,7 @@ SECRET_KEY = 'toy^p**jvg*wlh_wc*inq46!*&@x%*dwbuq-r$x&2!+eq^(-g@'
 DEBUG=config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-   #'https://instaglamapp.herokuapp.com',
+  config('ALLOWED_HOSTS', cast=Csv()) 
 ]
 
 
