@@ -12,13 +12,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
-import dj_database_url
-from decouple import config,Csv
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MODE=config('MODE', default='dev')
+
 SECRET_KEY=config('SECRET_KEY')
 
 
@@ -29,12 +28,10 @@ SECRET_KEY=config('SECRET_KEY')
 SECRET_KEY = 'toy^p**jvg*wlh_wc*inq46!*&@x%*dwbuq-r$x&2!+eq^(-g@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG=config('DEBUG', default=False, cast=bool)
+DEBUG=(os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = [
-  config('ALLOWED_HOSTS', cast=Csv()) 
-]
 
+ALLOWED_HOSTS = ['instaglamapp.herokuapp.com']
 
 # Application definition
 
@@ -92,34 +89,8 @@ WSGI_APPLICATION = 'instagram.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-if config('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
-       }
-       
-   }
-# production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 
-config('ALLOWED_HOSTS', cast=Csv())
-
-
-'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -130,7 +101,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-'''
+
 
 
 # Password validation
@@ -178,9 +149,6 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static_cdn')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 TEMP = os.path.join(BASE_DIR, 'temp')
 
-UPLOADCARE = {
-    'pub_key':'cdcde9d88fea3c0d203e',
-    'secret':'8b3cceb6c375319683f6',
-}
+
 
 django_heroku.settings(locals())
