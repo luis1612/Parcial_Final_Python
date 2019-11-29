@@ -74,6 +74,18 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
 
+## :ok_hand: Otro metodo de instalacion
+Para una fácil instalación, puede ejecutar el script de instalación después de instalar[Python ](https://www.python.org) y [Django ](https://www.djangoproject.com/).
+ 
+ ```
+# Windows
+install.cmd
+```
+
+El script crea la base de datos y las tablas necesarias. Después de crear un superusuario para acceder al sitio de administración. El script de instalación crea uno para ti.
+Simplemente escriba su nombre de usuario, correo electrónico y contraseña cuando se le solicite y el servidor se iniciará después de eso.
+
+
 Después de la instalación, puede acceder a [http://localhost:8000/admin/](http://localhost:8000/admin/) y agregar al menos una ubicación al conjunto de datos. Simplemente inicie sesión con su superusuario creado y navegue a ubicaciones y presione agregar. Ahora depende de usted cómo se llamará su primera ubicación. Este es solo su nombre de ubicación sin espacios y caracteres pequeños.
 
 Ahora puede usar esta aplicación navegando a [http://localhost:8000/](http://localhost:8000/) y usar esta aplicación.
