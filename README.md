@@ -86,7 +86,7 @@ El script crea la base de datos y las tablas necesarias. Después de crear un su
 Simplemente escriba su nombre de usuario, correo electrónico y contraseña cuando se le solicite y el servidor se iniciará después de eso.
 
 
-Después de la instalación, puede acceder a [http://localhost:8000/admin/](http://localhost:8000/admin/) y agregar al menos una ubicación al conjunto de datos. Simplemente inicie sesión con su superusuario creado y navegue a ubicaciones y presione agregar. Ahora depende de usted cómo se llamará su primera ubicación. Este es solo su nombre de ubicación sin espacios y caracteres pequeños.
+Después de la instalación, puede acceder a [http://localhost:8000/admin/](http://localhost:8000/admin/) y agregar al menos una ubicación al conjunto de datos. Simplemente inicie sesión con su superusuario creado y navegue a ubicaciones y presione agregar. Ahora depende de usted cómo utilizara la aplicacion. Este es solo su nombre de ubicación sin espacios y caracteres pequeños.
 
 Ahora puede usar esta aplicación navegando a [http://localhost:8000/](http://localhost:8000/) y usar esta aplicación.
 
