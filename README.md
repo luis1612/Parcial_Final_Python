@@ -32,6 +32,7 @@ Después de la instalación, puede acceder a [http://localhost:8000/](http://loc
 - Django MVC framework
 - HTML, CSS and Bootstrap
 - JavaScript
+- sqlite3
 - Postgressql
 - Heroku
 ```
